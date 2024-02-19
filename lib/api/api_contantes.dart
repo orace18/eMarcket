@@ -1,0 +1,14 @@
+final baseUrl = "http://192.168.1.100:5000/";
+final userUrl = 'user/';
+final registerUrl = baseUrl + userUrl + 'register';
+final loginUrl = baseUrl + userUrl + 'login';
+final userType = 'client';
+final categorieUrl = baseUrl + 'categorie/';
+final popularProductUrl = baseUrl + 'article/';
+final articleUrl = baseUrl + 'article/';
+final addToCartUrl = baseUrl + "cart/addtocart";
+final myCartUrl = baseUrl + "cart/user/";
+final chargeWalletUrl = baseUrl + 'wallet/recharge';
+final payProductUrl = baseUrl + 'wallet/payment';
+final transactionHistoryUrl = baseUrl + '';
+final removetoCartUrl = baseUrl + 'cart/removefromcart';
