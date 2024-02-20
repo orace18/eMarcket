@@ -93,27 +93,39 @@ class CategoryCard extends StatelessWidget {
       width: 150.0,
       child: Card(
         color: color,
-        child: ListTile(
-          leading: const Icon(
-            Icons.route_outlined,
-            color: Colors.white,
-          ),
-          onTap: () {
-            Get.toNamed('/add');
-          },
-          title: Text(
-            category.libelle,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.route_outlined,
+                color: Colors.white,
+                size: 40.0, // Taille de l'icône
+              ),
             ),
-          ),
-          subtitle: Text(
-            category.description,
-            style: TextStyle(
-              color: Colors.white,
+            ListTile(
+              onTap: () {
+                Get.toNamed('/add');
+              },
+              title: Text(
+                category.libelle,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0, // Taille du texte
+                ),
+              ),
+              subtitle: Text(
+                category.description,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.0, // Taille du texte
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

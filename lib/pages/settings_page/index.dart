@@ -1,4 +1,6 @@
-import 'package:easy_market_client/pages/product_page/index.dart';
+import 'package:easy_market_client/api/auth/api_auth_client.dart';
+import 'package:easy_market_client/pages/settings_page/widgets/langue.dart';
+import 'package:easy_market_client/pages/settings_page/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +21,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text('change_lang'.tr),
                 trailing: Icon(Icons.language),
                 onTap: () {
-                  
+                  Get.to(LanguagePage());
                 },
               ),
             ),
@@ -28,8 +30,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text('change_theme'.tr),
                 trailing: Icon(Icons.color_lens),
                 onTap: () {
-                  // Action pour changer le thème
-                  // (peut nécessiter la navigation vers une nouvelle page)
+                  Get.to(ThemePage());
                 },
               ),
             ),
@@ -37,9 +38,11 @@ class SettingsPage extends StatelessWidget {
               child: ListTile(
                 title: Text('log_out'.tr),
                 trailing: Icon(Icons.exit_to_app),
-                onTap: () {
-                  // Action pour la déconnexion
-                  // (par exemple, retour à la page de connexion)
+                onTap: () async {
+                  bool isValid = await AuthClient().logout();
+                  if (isValid == true) {
+                    Get.offAllNamed("/login");
+                  }
                 },
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:easy_market_client/notification_service.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:flutter/widgets.dart';
 import 'package:easy_market_client/pages/home_page/widgets/bottom_menu.dart';
 import 'package:get/get.dart';
@@ -45,7 +46,7 @@ class ChatPageState extends State<ChatPage> {
 
     try {
       channel = IOWebSocketChannel.connect(
-          "ws://192.168.1.100:5000/$myid"); //channel IP : Port
+          "ws://$webUrl/$myid"); //channel IP : Port
       channel.stream.listen(
         (message) {
           print(message);

@@ -295,9 +295,8 @@ class MonPanierPage extends StatelessWidget {
     );
   }
 
-  /* Widget buildCartItem(int index) {
+  Widget buildCartItem(int index) {
     final article = panierController.articles[index];
-
     return
      Card(
       color: Colors.green[100],
@@ -309,7 +308,6 @@ class MonPanierPage extends StatelessWidget {
         ),
         title: Row(
           children: [
-          
             Expanded(
               child: Text(article.nom, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
             ),
@@ -321,27 +319,12 @@ class MonPanierPage extends StatelessWidget {
             Text('${article.categorie}'),
             Row(
               children: [
-               /*  IconButton(
-                  icon: Icon(Icons.remove),
-                  color: Colors.red,
-                  onPressed: () {
-                    panierController.diminuerQuantite(article);
-                    setState() {}
-                  },
-                ), */
                 Text(
                   'quantity'.tr + ' ${article.quantite}',
                   style: TextStyle(
                     color: Colors.black,
                   ),
                 ),
-               /*  IconButton(
-                  icon: Icon(Icons.add),
-                  color: Colors.green,
-                  onPressed: () {
-                    panierController.augmenterQuantite(article);
-                  },
-                ), */
               ],
             ),
           ],
@@ -370,87 +353,5 @@ class MonPanierPage extends StatelessWidget {
         ),
       ),
     );
-  } */
-  Widget buildCartItem(int index) {
-  final article = panierController.articles[index];
-  String id = article.id.toString();
-
-  return Dismissible(
-
-    key: Key(id), // Use a unique key for each item
-    onDismissed: (direction) {
-      // Remove the item from the list when dismissed
-      panierController.supprimerArticle(id);
-    },
-    background: Container(
-      color: Colors.red,
-      child: Icon(
-        Icons.delete,
-        color: Colors.white,
-        size: 30,
-      ),
-      alignment: Alignment.centerRight,
-      padding: EdgeInsets.only(right: 20),
-    ), // Add a comma here
-    child: Card(
-      color: Colors.green[100],
-      child: ListTile(
-        leading: Image.network(
-          article.image,
-          height: 50,
-          width: 50,
-        ),
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(
-                article.nom,
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('${article.categorie}'),
-            Row(
-              children: [
-                Text(
-                  'quantity'.tr + ' ${article.quantite}',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        trailing: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              '\FCFA ${(article.prixOriginal * article.quantite).toStringAsFixed(1)}',
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              '-\FCFA ${(article.prix * article.quantite).toStringAsFixed(1)}',
-              style: TextStyle(
-                color: Colors.red,
-                decoration: TextDecoration.lineThrough,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
+  } 
 }

@@ -1,6 +1,8 @@
 import 'package:easy_market_client/pages/categorie_page/controllers/categorie_binding.dart';
 import 'package:easy_market_client/pages/categorie_page/index.dart';
 import 'package:easy_market_client/pages/chat_page/index.dart';
+import 'package:easy_market_client/pages/forgotpassword_page/controller/forgotpass_binding.dart';
+import 'package:easy_market_client/pages/forgotpassword_page/index.dart';
 import 'package:easy_market_client/pages/home_page/controllers/home_binding.dart';
 import 'package:easy_market_client/pages/home_page/index.dart';
 import 'package:easy_market_client/pages/login_page/controllers/login_binding.dart';
@@ -15,10 +17,12 @@ import 'package:easy_market_client/pages/panier_page/index.dart';
 import 'package:easy_market_client/pages/profil_page/index.dart';
 import 'package:easy_market_client/pages/register_page/controllers/register_binding.dart';
 import 'package:easy_market_client/pages/register_page/index.dart';
+import 'package:easy_market_client/pages/settings_page/controllers/setting_binding.dart';
 import 'package:easy_market_client/pages/settings_page/index.dart';
 import 'package:easy_market_client/pages/splash_page/controllers/splash_binding.dart';
 import 'package:easy_market_client/pages/splash_page/index.dart';
 import 'package:easy_market_client/pages/transaction_page/index.dart';
+import 'package:easy_market_client/pages/wallet_page/controllers/wallet_binding.dart';
 import 'package:easy_market_client/pages/wallet_page/index.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +81,7 @@ class AppRouter {
     GetPage(
       name: '/setting',
       page: () =>  SettingsPage(),
-    //  binding: HomeBinding(),
+      binding: SettingBinding(),
     ),
     GetPage(
       name: '/paiement',
@@ -87,7 +91,12 @@ class AppRouter {
       GetPage(
       name: '/wallet',
       page: () =>  WalletPage(),
-    //  binding: HomeBinding(),
+      binding: WalletBinding(),
+    ),
+     GetPage(
+      name: '/forgotpass',
+      page: () =>  ForgotPassPage(),
+      binding: ForgotPassBinding(),
     ),
       GetPage(
       name: '/transaction',

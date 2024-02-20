@@ -69,6 +69,20 @@ class LoginPage extends StatelessWidget {
                         ]),
                       ),
                       SizedBox(height: 16),
+                          Align(
+                        alignment: Alignment.centerRight,
+                        child: InkWell(
+                          onTap: () {
+                            Get.toNamed('/forgotpass');
+                          },
+                          child: Text(
+                            'forgot_password'.tr,
+                            style: TextStyle(
+                                color: AppTheme.easyMarketMaterial[100]),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 30,),
                       ElevatedButton(
                         onPressed: () async {
                           if (_controller.validateForm()) {

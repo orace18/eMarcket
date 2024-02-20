@@ -15,7 +15,7 @@ class SplashPage extends GetWidget<SplashController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/logos/easy_market.jpg', 
+                'assets/logos/eranou_ligth.jpeg', 
                 width: 200,
                 height: 200,
               ),

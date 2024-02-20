@@ -7,7 +7,7 @@ class ShowNotification  {
         FlutterLocalNotificationsPlugin();
  
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/easy');
+        AndroidInitializationSettings('@drawable/eranou_dark');
  
 /*     const IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(

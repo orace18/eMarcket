@@ -6,7 +6,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthClient {
-
   Future<bool> register(String nom, String prenom, String phone, String mail,
       String password) async {
     try {
@@ -50,12 +49,11 @@ class AuthClient {
         final res = jsonDecode(resquet.body);
         returnSuccess(res['message']);
         GetStorage().write('nom', res['lastname']);
-        print(
-            "Le nom est : ${GetStorage().write('nom', res['user']['lastname'])}");
         GetStorage().write('nom', res['user']['lastname']);
         GetStorage().write('prenom', res['user']['firstname']);
         GetStorage().write('email', res['user']['email']);
         GetStorage().write('id', res['user']['id']);
+        GetStorage().write('balance', res['user']['wallet']['balance']);
         GetStorage().write('phone', res['user']['phone']);
         GetStorage().write('token', res['token']);
         return true;
@@ -69,12 +67,32 @@ class AuthClient {
     }
   }
 
-  RxBool isLoggedIn = true.obs;
-  final box = GetStorage();
+Future<bool> logout() async {
+  String token = GetStorage().read('token').toString();
+  try {
+    final response = await http.post(
+      Uri.parse(logoutUrl),
+      headers: {'Authorization': 'Bearer $token'}, 
+    );
 
-  Future<void> logout() async {
-    await box.write('isLoggedIn', false);
-    isLoggedIn.value = false;
-    Get.offAllNamed("/login");
-  }  
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final responseData = jsonDecode(response.body);
+      GetStorage().remove('token');
+      GetStorage().remove('onboarding');
+      GetStorage().remove('nom');
+      GetStorage().remove('prenom');
+      GetStorage().remove('email');
+      GetStorage().remove('id');
+      GetStorage().remove('balance');
+      returnSuccess(responseData['message']);
+      return true;
+    } else {
+      final responseData = jsonDecode(response.body);
+      returnError(responseData['message']);
+      return false;
+    }
+  } catch (error) {
+    throw Exception('Erreur lors de la déconnexion! L\'erreur est: $error');
+  }
+}
 }

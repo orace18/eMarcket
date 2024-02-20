@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:usesCleartextTraffic="true"
-        android:label="Easy Market"
+        android:label="Eranou Client"
         android:name="${applicationName}"
-        android:icon="@drawable/easy_market">
+        android:icon="@drawable/eranou_ligth">
         <activity
             android:showWhenLocked="true"
             android:turnScreenOn="true"

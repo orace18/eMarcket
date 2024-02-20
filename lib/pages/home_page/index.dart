@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         leading: Image.asset(
-          'assets/logos/easy_market.jpg',
+          'assets/logos/eranou_ligth.jpeg',
           fit: BoxFit.cover,
           width: double.infinity,
         ),

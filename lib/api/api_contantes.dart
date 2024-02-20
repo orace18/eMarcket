@@ -1,5 +1,6 @@
-final baseUrl = "http://192.168.1.100:5000/";
+final baseUrl = "http://192.168.1.19:5000/";
 final userUrl = 'user/';
+final webUrl = "192.168.1.19:5000";
 final registerUrl = baseUrl + userUrl + 'register';
 final loginUrl = baseUrl + userUrl + 'login';
 final userType = 'client';
@@ -12,3 +13,4 @@ final chargeWalletUrl = baseUrl + 'wallet/recharge';
 final payProductUrl = baseUrl + 'wallet/payment';
 final transactionHistoryUrl = baseUrl + '';
 final removetoCartUrl = baseUrl + 'cart/removefromcart';
+final logoutUrl = baseUrl + 'user/logout';

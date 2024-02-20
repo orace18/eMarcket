@@ -199,26 +199,5 @@ class PanierController extends GetxController {
     }
   }
 
-  void buyProducts(String montant) async {
-    final balance = GetStorage().read('balance');
-    String id = GetStorage().read('id');
-    if (total > balance) {
-      returnError('short_sold'.tr);
-    } else {
-      final montantTotal = balance - total;
-      try {
-        final request = await http.post(Uri.parse(payProductUrl),
-            headers: {}, body: jsonEncode({'userId': id, 'amount': montant}));
-        if (request.statusCode == 200 || request.statusCode == 201) {
-          final response = jsonDecode(request.body);
-          returnSuccess(response['message']);
-        } else {
-          final response = jsonDecode(request.body);
-          returnError(response['message']);
-        }
-      } catch (error) {
-        throw Exception('Erreur: $error');
-      }
-    }
-  }
+  
 }

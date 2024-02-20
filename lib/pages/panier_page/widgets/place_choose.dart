@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:easy_market_client/api/api_contantes.dart';
+import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:easy_market_client/constants.dart';
@@ -13,7 +15,7 @@ class PlaceChoosePage extends StatefulWidget {
 
 class _PlaceChoosePageState extends State<PlaceChoosePage> {
   TextEditingController _locationController = TextEditingController();
-  String montant = GetStorage().read('montant').toString();
+  final montant = GetStorage().read('montant');
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +60,69 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
               SizedBox(height: 16),
               Text('Montant: $montant FCFA'),
               SizedBox(height: 16),
+              
+              Text(
+                  'Lieu de livraison: ${_locationController.text.toString()}' ?? "0"),
+              SizedBox(height: 16),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: AppTheme.easyMarketMaterial,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(10),
+                      bottom: Radius.circular(10),
+                    ),
+                  ),
+                ),
                 onPressed: () {
-                  
+                  buyProducts(_locationController.text.toString());
                 },
-                child: Text('Valider'),
+                child: Text('Valider', style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      ),),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void buyProducts(String livraisonPlace) async {
+    final balance = GetStorage().read('balance');
+
+    String dateTime = DateTime.now().timeZoneName;
+    String id = GetStorage().read('id').toString();
+    String nom = GetStorage().read('nom').toString() +
+        GetStorage().read('prenom').toString();
+    dateTime = dateTime.toString();
+    String idCommande = dateTime + id + nom;
+
+    if (montant > balance) {
+      returnError('short_sold'.tr);
+    } else {
+      final montantTotal = balance - montant;
+      try {
+        final request = await http.post(Uri.parse(payProductUrl),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'userId': id,
+              'livraisonPlace': livraisonPlace,
+              'idCommande': idCommande,
+              'montantTotal': montantTotal,
+            }));
+        if (request.statusCode == 200 || request.statusCode == 201) {
+          final response = jsonDecode(request.body);
+          returnSuccess(response['message']);
+        } else {
+          final response = jsonDecode(request.body);
+          returnError(response['message']);
+        }
+      } catch (error) {
+        throw Exception('Erreur: $error');
+      }
+    }
   }
 
   Future<List<String>> getLocationSuggestions(String query) async {
