@@ -90,7 +90,8 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.0,
+      width: 200.0,
+      height: 200.0,
       child: Card(
         color: color,
         child: Column(
@@ -102,27 +103,29 @@ class CategoryCard extends StatelessWidget {
               child: Icon(
                 Icons.route_outlined,
                 color: Colors.white,
-                size: 40.0, // Taille de l'icône
+                size: 40.0,
               ),
             ),
             ListTile(
               onTap: () {
                 Get.toNamed('/add');
               },
-              title: Text(
+              title:Center( 
+               child: Text(
                 category.libelle,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16.0, // Taille du texte
+                  fontSize: 16.0, 
                 ),
-              ),
-              subtitle: Text(
-                category.description,
+              )),
+              subtitle: Center(
+                child: Text(
+                category.nombres,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14.0, // Taille du texte
-                ),
+                  fontSize: 14.0,
+                )),
               ),
             ),
           ],

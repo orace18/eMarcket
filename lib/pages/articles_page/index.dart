@@ -73,7 +73,7 @@ void showProductDetails(Article article) {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${articles[index].prix}"),
+                      Text("${articles[index].prixPromo}"),
                       const SizedBox(width: 1.5),
                       RichText(
                         text: TextSpan(

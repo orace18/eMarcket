@@ -1,4 +1,5 @@
 import 'package:easy_market_client/pages/forgotpassword_page/controller/forgotpass_controller.dart';
+import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +31,15 @@ class ForgotPassPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                 style: ElevatedButton.styleFrom(
+                          primary: AppTheme.easyMarketMaterial,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(10),
+                              bottom: Radius.circular(10),
+                            ),
+                          ),
+                        ),
                 onPressed: () => controller.submitEmail(),
                 child: Text('submit'.tr, style: TextStyle(
                       color: Colors.white,

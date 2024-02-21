@@ -60,9 +60,9 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
               SizedBox(height: 16),
               Text('Montant: $montant FCFA'),
               SizedBox(height: 16),
-              
               Text(
-                  'Lieu de livraison: ${_locationController.text.toString()}' ?? "0"),
+                  'Lieu de livraison: ${_locationController.text.toString()}' ??
+                      "0"),
               SizedBox(height: 16),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -76,11 +76,15 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
                 ),
                 onPressed: () {
                   buyProducts(_locationController.text.toString());
+                  Get.offAllNamed('/home');
                 },
-                child: Text('Valider', style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      ),),
+                child: Text(
+                  'valid'.tr,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -92,28 +96,39 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
   void buyProducts(String livraisonPlace) async {
     final balance = GetStorage().read('balance');
 
-    String dateTime = DateTime.now().timeZoneName;
+    if (montant == null || livraisonPlace.isEmpty) {
+      returnError('Montant ou lieu de livraison non spécifié');
+      return;
+    }
+
+    String dateTime = DateTime.now().toString();
     String id = GetStorage().read('id').toString();
     String nom = GetStorage().read('nom').toString() +
+        " " +
         GetStorage().read('prenom').toString();
-    dateTime = dateTime.toString();
     String idCommande = dateTime + id + nom;
 
     if (montant > balance) {
       returnError('short_sold'.tr);
     } else {
-      final montantTotal = balance - montant;
+      //final montantTotal = balance - montant;
+      print("L'id de la commande: $idCommande");
+      print("Le nom: $nom");
+      print("Le montant: $montant");
+      print("L'id du user: $id");
+      print("Le lieu: $livraisonPlace");
       try {
         final request = await http.post(Uri.parse(payProductUrl),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
               'userId': id,
-              'livraisonPlace': livraisonPlace,
-              'idCommande': idCommande,
-              'montantTotal': montantTotal,
+              'delivery_place': livraisonPlace,
+              'IdCommande': idCommande,
+              'total_price': montant,
             }));
         if (request.statusCode == 200 || request.statusCode == 201) {
           final response = jsonDecode(request.body);
+          GetStorage().write('balance', response['balance']);
           returnSuccess(response['message']);
         } else {
           final response = jsonDecode(request.body);

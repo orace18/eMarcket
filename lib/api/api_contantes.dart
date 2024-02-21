@@ -14,3 +14,4 @@ final payProductUrl = baseUrl + 'wallet/payment';
 final transactionHistoryUrl = baseUrl + '';
 final removetoCartUrl = baseUrl + 'cart/removefromcart';
 final logoutUrl = baseUrl + 'user/logout';
+final newPasswordUrl = baseUrl + 'user/forgot-password';

@@ -38,7 +38,7 @@ class PopularSection extends GetWidget<HomeController> {
                         Get.to(ArticlePage(categorieLibelle: article.categorie));
                       },
                       child: Container(
-                        width: 200.0,
+                        width: 400.0,
                         height: 400.0,
                         child: Card(
                           child: Padding(

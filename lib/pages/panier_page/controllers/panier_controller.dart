@@ -84,7 +84,6 @@ class PanierController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
 
-        // Récupérer les informations des articles
         articles =
             (jsonResponse['articlesInfo'] as List<dynamic>).map((articleInfo) {
           final articleInfoData = articleInfo['articleInfo'];
@@ -148,8 +147,8 @@ class PanierController extends GetxController {
   void passerAuPaiement() {
     Get.dialog(
       AlertDialog(
-        title: Text('Paiement'),
-        content: Text('Voulez-vous payer \FCFA ${total}?'),
+        title: Text('pay'.tr),
+        content: Text('Voulez-vous payer ${total} FCFA ?'),
         actions: [
           TextButton(
             child: Text('exit'.tr),
@@ -161,7 +160,6 @@ class PanierController extends GetxController {
             child: Text('pay'.tr),
             onPressed: () {
               GetStorage().write('montant', total);
-
               Get.to(PlaceChoosePage());
             },
           ),

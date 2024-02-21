@@ -1,3 +1,4 @@
+import 'package:easy_market_client/pages/home_page/controllers/home_controller.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_market_client/pages/home_page/widgets/bottom_menu.dart';
@@ -6,6 +7,8 @@ import 'package:easy_market_client/pages/home_page/widgets/populaire.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  final PageController _pageController = PageController(initialPage: 0);
+  HomeController controller = HomeController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +31,9 @@ class HomePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
+                      onChanged: (value) {
+                       // controller.filterItems();
+                      },
                       decoration: InputDecoration(
                         hintText: 'seach'.tr,
                         prefixIcon: Icon(Icons.search),
@@ -57,7 +63,20 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 100.0),
+            SizedBox(height: 10.0),
+            Container(
+              height: 150,
+              width: double.infinity,
+              child: PageView(
+                controller: _pageController,
+                children: [
+                  buildCarouselItem(Colors.blue, 'test1'.tr),
+                  buildCarouselItem(Colors.green, 'test2'.tr),
+                  buildCarouselItem(Colors.orange, 'test3'.tr),
+                ],
+              ),
+            ),
+            SizedBox(height: 16.0),
             CategorySection(),
             SizedBox(height: 16.0),
             PopularSection(),
@@ -65,6 +84,38 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),
+    );
+  }
+
+  Widget buildCarouselItem(Color color, String text) {
+    return Container(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 10.0),
+      padding: EdgeInsets.all(20.0),
+      child: Center(
+        child: Column(
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.shop_2_sharp,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+            Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
