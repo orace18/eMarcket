@@ -91,7 +91,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchItems();
+    
   }
 
   void navigateBack() => Get.back();
@@ -118,44 +118,27 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> fetchItems() async {
-    try {
-      final categoriesResponse = await http.get(Uri.parse(categorieUrl));
-      if (categoriesResponse.statusCode == 200) {
-        Iterable categoriesJson = json.decode(categoriesResponse.body);
-        categories.assignAll(categoriesJson.map((category) => Category(
-          id: category['_id'],
-          libelle: category['libelle'],
-          description: category['description'],
-          nombres: category['nombres'],
-        )));
-        filteredCategories.assignAll(categories);
-      } else {
-        throw Exception("Failed to load categories");
-      }
-    } catch (error) {
-      throw Exception("Failed to load categories: $error");
-    }
+  RxList<dynamic> filteredItems = <dynamic>[].obs;
 
-    try {
-      final productsResponse = await http.get(Uri.parse(articleUrl));
-      if (productsResponse.statusCode == 200) {
-        Iterable productsJson = json.decode(productsResponse.body);
-        products.assignAll(productsJson.map((product) => Article(
-          id: product['_id'],
-          nom: product['nom'],
-          description: product['description'],
-          photo: product['photo'],
-          prixPromo: product['prix_promo'],
-          categorie: product['categorie'],
-          idMarchand: product['merchandId'],
-        )));
-        filteredProducts.assignAll(products);
-      } else {
-        throw Exception("Failed to load products");
-      }
-    } catch (error) {
-      throw Exception("Failed to load products: $error");
-    }
+  void filterItems(String searchValue) {
+    searchValue = searchValue.toLowerCase();
+
+    // Filtrer les catégories
+    filteredCategories.assignAll(categories
+        .where((category) =>
+            category.libelle.toLowerCase().contains(searchValue) ||
+            category.description.toLowerCase().contains(searchValue))
+        .toList());
+
+    // Filtrer les produits
+    filteredProducts.assignAll(products
+        .where((product) =>
+            product.nom.toLowerCase().contains(searchValue) ||
+            product.description.toLowerCase().contains(searchValue))
+        .toList());
+
+    // Combinez les résultats filtrés dans une liste commune (ou modifiez en fonction de vos besoins)
+    filteredItems.assignAll([...filteredCategories, ...filteredProducts]);
   }
+
 }

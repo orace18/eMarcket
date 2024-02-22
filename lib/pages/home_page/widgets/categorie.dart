@@ -101,7 +101,7 @@ class CategoryCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
-                Icons.route_outlined,
+                Icons.category,
                 color: Colors.white,
                 size: 40.0,
               ),

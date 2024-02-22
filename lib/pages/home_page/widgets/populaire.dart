@@ -18,6 +18,7 @@ class PopularSection extends GetWidget<HomeController> {
         SizedBox(height: 8.0),
         Container(
           height: 150.0,
+          margin: EdgeInsets.only(bottom: 16.0),
           child: FutureBuilder<List<Article>>(
             future: controller.fetchArticles(),
             builder: (context, snapshot) {
@@ -38,9 +39,11 @@ class PopularSection extends GetWidget<HomeController> {
                         Get.to(ArticlePage(categorieLibelle: article.categorie));
                       },
                       child: Container(
-                        width: 400.0,
-                        height: 400.0,
+                        margin: EdgeInsets.only(right: 8.0),
+                        height: 150.0,
+                        width: 150.0,
                         child: Card(
+                          color: Colors.white,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -53,9 +56,9 @@ class PopularSection extends GetWidget<HomeController> {
                                 ),
                                 Text(
                                   article.nom,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle( color: Colors.red,fontWeight: FontWeight.bold),
                                 ),
-                                Text(article.description),
+                                Text(article.description, style: TextStyle(color: Colors.blueGrey),),
                                 Text(
                                   "${article.prixPromo.toString()} FCFA",
                                   style: TextStyle(

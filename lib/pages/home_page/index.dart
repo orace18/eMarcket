@@ -5,10 +5,13 @@ import 'package:easy_market_client/pages/home_page/widgets/bottom_menu.dart';
 import 'package:easy_market_client/pages/home_page/widgets/categorie.dart';
 import 'package:easy_market_client/pages/home_page/widgets/populaire.dart';
 import 'package:get/get.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
 
 class HomePage extends StatelessWidget {
   final PageController _pageController = PageController(initialPage: 0);
   HomeController controller = HomeController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +35,7 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                       // controller.filterItems();
+                         controller.filterItems(value);
                       },
                       decoration: InputDecoration(
                         hintText: 'seach'.tr,
@@ -65,15 +68,31 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Container(
-              height: 150,
+              height: 200,
               width: double.infinity,
-              child: PageView(
-                controller: _pageController,
-                children: [
-                  buildCarouselItem(Colors.blue, 'test1'.tr),
-                  buildCarouselItem(Colors.green, 'test2'.tr),
-                  buildCarouselItem(Colors.orange, 'test3'.tr),
-                ],
+              margin: EdgeInsets.only(bottom: 16.0),
+              child: CarouselSlider.builder(
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index, int realIndex) {
+                  return buildCarouselItem(
+                    Colors.blue, 
+                    'test${index + 1}'.tr,
+                  );
+                },
+                options: CarouselOptions(
+                  height: 190.0,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                ),
               ),
             ),
             SizedBox(height: 16.0),
