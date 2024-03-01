@@ -1,5 +1,5 @@
-import 'package:easy_market_client/local_lang/lang/en_us.dart';
-import 'package:easy_market_client/local_lang/lang/fr_fr.dart';
+import 'package:easy_market_client/languages/lang/en_us.dart';
+import 'package:easy_market_client/languages/lang/fr_fr.dart';
 import 'package:get/get.dart';
 
 

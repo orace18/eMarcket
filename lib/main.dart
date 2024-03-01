@@ -1,5 +1,5 @@
-import 'package:easy_market_client/local_lang/translator.dart';
-import 'package:easy_market_client/notification_service.dart';
+import 'package:easy_market_client/languages/translator.dart';
+import 'package:easy_market_client/helpers/notification_service.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:easy_market_client/providers/themes/theme_provider.dart';
 import 'package:easy_market_client/routers/routes.dart';

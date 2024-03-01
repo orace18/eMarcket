@@ -17,7 +17,7 @@ class PopularSection extends GetWidget<HomeController> {
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
         SizedBox(height: 8.0),
         Container(
-          height: 150.0,
+          height: 230.0,
           margin: EdgeInsets.only(bottom: 16.0),
           child: FutureBuilder<List<Article>>(
             future: controller.fetchArticles(),
@@ -40,7 +40,7 @@ class PopularSection extends GetWidget<HomeController> {
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 8.0),
-                        height: 150.0,
+                        height: 200.0,
                         width: 150.0,
                         child: Card(
                           color: Colors.white,
@@ -51,14 +51,15 @@ class PopularSection extends GetWidget<HomeController> {
                               children: [
                                 Image.network(
                                   "$baseUrl${article.photo}",
-                                  height: 50,
-                                  width: 50,
+                                  height: 90,
+                                  width: 90,
                                 ),
                                 Text(
                                   article.nom,
                                   style: TextStyle( color: Colors.red,fontWeight: FontWeight.bold),
                                 ),
-                                Text(article.description, style: TextStyle(color: Colors.blueGrey),),
+                                Center(child: Text(article.description, style: TextStyle(color: Colors.blueGrey),)),
+                                SizedBox(height: 8,),
                                 Text(
                                   "${article.prixPromo.toString()} FCFA",
                                   style: TextStyle(

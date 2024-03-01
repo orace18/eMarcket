@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:easy_market_client/pages/chat_page/models/message_model.dart';
-import 'package:easy_market_client/notification_service.dart';
+import 'package:easy_market_client/helpers/notification_service.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

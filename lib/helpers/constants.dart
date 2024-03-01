@@ -7,7 +7,7 @@ const errorColor = Colors.red;
 const successColor = Colors.green;
 const infoColor = Colors.indigo;
 const google_api_key = "AIzaSyBbTebj7DVC2yJu0hDJPfqP63x9uz9GQ-8";
-
+const montantByKm = 0;
 const easyMarketGreen = Color(0xFF900702E);
 const easyMarketGreenLigth = Color(0xFF00EF44);
 const easyMarketYellow = Color(0xfffacc22);
@@ -59,4 +59,3 @@ String private_key =
     "pk_d0db75af8c452447f9b020cc251bd08930e55e4e53aef2880f623905190cda25";
 String secret =
     "sk_061a182a4551eddcece391138eaaabd07337f8a3acfec29c5f6a7c8b1d5d20e5";
-         

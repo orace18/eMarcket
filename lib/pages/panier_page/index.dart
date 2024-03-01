@@ -3,6 +3,7 @@ import 'package:easy_market_client/pages/panier_page/controllers/panier_controll
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MonPanierPage extends StatelessWidget {
   final PanierController panierController = PanierController();
@@ -37,11 +38,35 @@ class MonPanierPage extends StatelessWidget {
       bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
+   String balance = GetStorage().read("balance").toString();
 
   Widget buildCartList() {
     return SingleChildScrollView(
       child: Column(
         children: [
+            Card(
+              elevation: 10.0,
+              color: Colors.amber,
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.account_balance_wallet,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'solde'.tr + ': $balance FCFA',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          
+          SizedBox(height: 10.0),
           for (int index = 0; index < panierController.articles.length; index++)
             buildCartItem(index),
           Padding(

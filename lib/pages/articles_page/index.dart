@@ -38,10 +38,9 @@ class _ArticlePageState extends State<ArticlePage> {
     fetchArticles();
   }
 
-void showProductDetails(Article article) {
-  Get.to(() => ProductPage(article: article));
-}
-
+  void showProductDetails(Article article) {
+    Get.to(() => ProductPage(article: article));
+  }
 
   List<Article> getArticlesByCategorie() {
     return allArticles
@@ -62,9 +61,14 @@ void showProductDetails(Article article) {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              leading: Image.network("$baseUrl${articles[index].photo}",
-              height: 50,
-              width: 50,
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.network(
+                  "$baseUrl${articles[index].photo}",
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit.cover,
+                ),
               ),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,22 +77,27 @@ void showProductDetails(Article article) {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${articles[index].prixPromo}"),
+                      Text("${articles[index].prixPromo} FCFA"),
                       const SizedBox(width: 1.5),
-                      RichText(
-                        text: TextSpan(
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "${articles[index].prix}",
-                              style: const TextStyle(
-                                color: Colors.grey,
-                              ),
+                      Expanded(
+                        child: RichText(
+                          overflow: TextOverflow
+                              .ellipsis, // Ajoutez ceci pour gérer l'overflow
+                          text: TextSpan(
+                            style: const TextStyle(
+                              color: Colors.green,
+                              decoration: TextDecoration.lineThrough,
                             ),
-                          ],
+                            children: [
+                              TextSpan(
+                                text: "${articles[index].prix} FCFA",
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -99,7 +108,7 @@ void showProductDetails(Article article) {
                 icon: const Icon(Icons.shopping_cart),
                 color: AppTheme.easyMarketMaterial,
                 onPressed: () {
-                showProductDetails(articles[index]);
+                  showProductDetails(articles[index]);
                 },
               ),
               onTap: () {

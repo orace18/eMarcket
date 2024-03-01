@@ -47,6 +47,7 @@ const fr_FR = {
   'test3': 'Vendez aussi ici à des miliers de personnes partout dans le monde. ',
   'quantity': 'Quantité',
   'solde' : 'Solde',
+  'valid': 'Valider',
   'forgot_password':'Mot de passe Oublié',
   'light':'Theme Clair',
   'dark':'Theme Sombre',
@@ -56,4 +57,7 @@ const fr_FR = {
   'recharge':'Recharger',
   'success':'Reussie',
   'error':'Erreur',
+  'a': 'à',
+  'reason':'Motif',
+  'amount': 'Montant'
 };

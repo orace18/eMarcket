@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       Icons.wallet,
-                      color: AppTheme.easyMarketMaterial,
+                      color: Color(0xFF196CB0),
                     ),
                     onPressed: () {
                       Get.toNamed('/wallet');
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       Icons.person,
-                      color: AppTheme.easyMarketMaterial,
+                      color: Color(0xFF196CB0),
                     ),
                     onPressed: () {
                       Get.toNamed('/profil');
@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
           children: [
             IconButton(
               icon: Icon(
-                Icons.shop_2_sharp,
+                Icons.shape_line_rounded,
                 color: Colors.white,
               ),
               onPressed: () {},

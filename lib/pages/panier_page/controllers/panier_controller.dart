@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:easy_market_client/api/api_contantes.dart';
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:easy_market_client/pages/panier_page/models/cart_item_model.dart';
 import 'package:easy_market_client/pages/panier_page/widgets/place_choose.dart';
 import 'package:get_storage/get_storage.dart';
@@ -145,7 +145,10 @@ class PanierController extends GetxController {
   }
 
   void passerAuPaiement() {
-    Get.dialog(
+     GetStorage().write('montant', total);
+     Get.to(PlaceChoosePage());
+     
+    /* Get.dialog(
       AlertDialog(
         title: Text('pay'.tr),
         content: Text('Voulez-vous payer ${total} FCFA ?'),
@@ -159,13 +162,12 @@ class PanierController extends GetxController {
           TextButton(
             child: Text('pay'.tr),
             onPressed: () {
-              GetStorage().write('montant', total);
-              Get.to(PlaceChoosePage());
+             
             },
           ),
         ],
-      ),
-    );
+      ), */
+    
   }
 
   Future<List<String>> getPlaces(String query) async {

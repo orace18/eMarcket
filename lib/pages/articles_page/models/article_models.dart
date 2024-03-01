@@ -24,7 +24,7 @@ class Article {
       id: json['_id'] ?? '',
       nom: json['nom'] ?? '',
       prix: (json['prix'] ?? 0).toDouble(),
-      prixPromo: (json['prix'] ?? 0).toDouble(),
+      prixPromo: (json['promo_prix'] ?? 0).toDouble(),
       description: json['description'] ?? '',
       categorie: json['categorie'] ?? '',
       photo: json['photo'] ?? '',

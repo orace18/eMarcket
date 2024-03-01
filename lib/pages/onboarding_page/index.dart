@@ -1,4 +1,4 @@
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:flutter/material.dart';

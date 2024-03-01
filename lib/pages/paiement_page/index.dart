@@ -1,4 +1,4 @@
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:easy_market_client/pages/paiement_page/controllers/paiement_controller.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class PaymentPage extends GetWidget<PaiementController> {
                   controller: controller.emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    labelText: 'email'.tr,
+                    labelText: 'Email',
                     border: OutlineInputBorder(),
                   ),
                 ),

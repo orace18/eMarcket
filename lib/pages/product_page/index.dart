@@ -1,5 +1,5 @@
 import 'package:easy_market_client/api/api_contantes.dart';
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:easy_market_client/pages/articles_page/models/article_models.dart';
 import 'package:easy_market_client/pages/product_page/controllers/product_controller.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
@@ -63,7 +63,7 @@ class ProductPage extends GetWidget<ProductController> {
                       ],
                     ),
                     Text(
-                      '\FCFA${article.prix}',
+                      '${article.prixPromo} FCFA',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
@@ -85,7 +85,7 @@ class ProductPage extends GetWidget<ProductController> {
                       ),
                     ),
                     Text(
-                      '\FCFA${article.prixPromo}',
+                      '${article.prix} FCFA',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,

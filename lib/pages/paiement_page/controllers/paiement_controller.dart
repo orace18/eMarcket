@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:easy_market_client/api/api_contantes.dart';
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
-import 'package:easy_market_client/success_screen.dart';
+import 'package:easy_market_client/helpers/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

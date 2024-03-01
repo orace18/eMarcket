@@ -3,10 +3,9 @@ import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceChoosePage extends StatefulWidget {
   @override
@@ -60,10 +59,6 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
               SizedBox(height: 16),
               Text('Montant: $montant FCFA'),
               SizedBox(height: 16),
-              Text(
-                  'Lieu de livraison: ${_locationController.text.toString()}' ??
-                      "0"),
-              SizedBox(height: 16),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: AppTheme.easyMarketMaterial,
@@ -75,8 +70,28 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
                   ),
                 ),
                 onPressed: () {
-                  buyProducts(_locationController.text.toString());
-                  Get.offAllNamed('/home');
+                  String total = GetStorage().read("montant").toString();
+                  Get.dialog(
+                    AlertDialog(
+                      title: Text('pay'.tr),
+                      content: Text('Voulez-vous payer ${total} FCFA ?'),
+                      actions: [
+                        TextButton(
+                          child: Text('exit'.tr),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                        TextButton(
+                          child: Text('pay'.tr),
+                          onPressed: () {
+                            buyProducts(_locationController.text.toString());
+                            Get.offAllNamed('/home');
+                          },
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 child: Text(
                   'valid'.tr,

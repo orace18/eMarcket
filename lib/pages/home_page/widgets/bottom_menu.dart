@@ -33,10 +33,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               icon: Container(),
               label: '',
             ),
-            const BottomNavigationBarItem(
+             const BottomNavigationBarItem(
               icon: Icon(Icons.notifications),
               label: '',
-            ),
+            ), 
             const BottomNavigationBarItem(
               icon: Icon(Icons.chat),
               label: '',
@@ -60,12 +60,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 selectedIndex = 2;
                 Get.toNamed('/cart');
                 break;
-              case 3:
+               case 3:
               selectedIndex = 3;
                 Get.toNamed('/notification');
-                break;
+                break; 
               case 4:
-              selectedIndex = 4;
+                selectedIndex = 4;
                 Get.toNamed('/chat');
                 break;
             }

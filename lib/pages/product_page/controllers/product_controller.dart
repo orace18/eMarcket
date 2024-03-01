@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:easy_market_client/api/api_contantes.dart';
-import 'package:easy_market_client/constants.dart';
+import 'package:easy_market_client/helpers/constants.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
