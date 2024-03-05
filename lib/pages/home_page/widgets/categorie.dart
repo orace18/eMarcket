@@ -1,15 +1,20 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:easy_market_client/pages/home_page/models/categorie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:get_storage/get_storage.dart';
 
 class CategorySection extends StatelessWidget {
+  
   Future<List<Category>> fetchCategories() async {
-    final response = await http.get(Uri.parse(categorieUrl));
+
+    String token = GetStorage().read('token').toString();
+    final response = await http.get(Uri.parse(categorieUrl),
+      headers: {'Authorization': 'Bearer $token'}
+    );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final List<dynamic> data = json.decode(response.body);

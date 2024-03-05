@@ -1,6 +1,6 @@
-final baseUrl = "http://192.168.100.12:5000/"; // 51.91.110.63
+final baseUrl = "http://51.91.110.63:5000/"; // 51.91.110.63
 final userUrl = 'user/';
-final webUrl = "192.168.100.12:5000";
+final webUrl = "51.91.110.63:5000";
 final registerUrl = baseUrl + userUrl + 'register';
 final loginUrl = baseUrl + userUrl + 'login';
 final userType = 'client';

@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ProductController extends GetxController {
+  String token = GetStorage().read('token').toString();
   var quantity = 1.obs;
   var price = 5.8.obs;
   var discount = 20.obs;
@@ -26,26 +27,24 @@ class ProductController extends GetxController {
   }
 
   Future<void> addToCart(String userId, String articleId, int quantity) async {
-    final body = jsonEncode({
-        'userId': userId,
-        'articleId': articleId,
-        'quantity' : quantity
-      });
+    final body = jsonEncode(
+        {'userId': userId, 'articleId': articleId, 'quantity': quantity});
     try {
       final response = await http.post(Uri.parse(addToCartUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: body
-      );
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token'
+          },
+          body: body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final res = jsonDecode(response.body);
         returnSuccess(res['message']);
-      }else{
+      } else {
         final res = jsonDecode(response.body);
-        returnSuccess(res['message']); 
+        returnSuccess(res['message']);
       }
     } catch (e) {
       throw Exception('Error to add to cart: $e');
     }
   }
-
 }

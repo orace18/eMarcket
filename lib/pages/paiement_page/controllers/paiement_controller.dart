@@ -11,7 +11,9 @@ import 'package:kkiapay_flutter_sdk/kkiapay_flutter_sdk.dart';
 import 'package:kkiapay_flutter_sdk/utils/config.dart';
 
 class PaiementController extends GetxController {
+
   final id = GetStorage().read('id').toString();
+  String token = GetStorage().read('token').toString();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController reasonController = TextEditingController();
@@ -23,7 +25,10 @@ class PaiementController extends GetxController {
     try {
       final request = await http.post(
         Uri.parse(chargeWalletUrl),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+        },
         body: jsonEncode({
           'userId': id,
           'amount': montant,
@@ -99,7 +104,9 @@ class PaiementController extends GetxController {
     }
   }
 
-  String nomPrenom = GetStorage().read("nom").toString() +' '+GetStorage().read("prenom").toString();
+  String nomPrenom = GetStorage().read("nom").toString() +
+      ' ' +
+      GetStorage().read("prenom").toString();
 
   Widget openKkiapayPayment() {
     String pays = phoneIsoCode.toString();

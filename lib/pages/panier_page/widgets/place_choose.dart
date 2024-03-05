@@ -15,6 +15,7 @@ class PlaceChoosePage extends StatefulWidget {
 class _PlaceChoosePageState extends State<PlaceChoosePage> {
   TextEditingController _locationController = TextEditingController();
   final montant = GetStorage().read('montant');
+  String token = GetStorage().read('token').toString();
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +135,10 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
       print("Le lieu: $livraisonPlace");
       try {
         final request = await http.post(Uri.parse(payProductUrl),
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token'
+            },
             body: jsonEncode({
               'userId': id,
               'delivery_place': livraisonPlace,

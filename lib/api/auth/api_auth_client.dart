@@ -30,13 +30,17 @@ class AuthClient {
         GetStorage().write('phone', res['user']['phone']);
         GetStorage().write('token', res['token']);
         return true;
-      } else {
+      } else if (resquest.statusCode == 404) {
+        Get.snackbar("error".tr, "Vérifiez votre connexion internet");
+        return false;
+      }
+      else {
         final res = jsonDecode(resquest.body);
         returnError(res['message']);
         return false;
       }
     } catch (error) {
-      throw Exception('Erreur lors de l\'inscription');
+      throw Exception('Erreur lors de l\'inscription $error');
     }
   }
 
@@ -57,42 +61,45 @@ class AuthClient {
         GetStorage().write('phone', res['user']['phone']);
         GetStorage().write('token', res['token']);
         return true;
+      } else if (resquet.statusCode == 404) {
+        Get.snackbar("error".tr, "Vérifiez votre connexion internet");
+        return false;
       } else {
         final res = jsonDecode(resquet.body);
         returnError(res['message']);
         return false;
       }
     } catch (error) {
-      throw Exception('Erreur lors de la connexion');
+      throw Exception('Erreur lors de la connexion: $error');
     }
   }
 
-Future<bool> logout() async {
-  String token = GetStorage().read('token').toString();
-  try {
-    final response = await http.post(
-      Uri.parse(logoutUrl),
-      headers: {'Authorization': 'Bearer $token'}, 
-    );
+  Future<bool> logout() async {
+    String token = GetStorage().read('token').toString();
+    try {
+      final response = await http.post(
+        Uri.parse(logoutUrl),
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      final responseData = jsonDecode(response.body);
-      GetStorage().remove('token');
-      GetStorage().remove('onboarding');
-      GetStorage().remove('nom');
-      GetStorage().remove('prenom');
-      GetStorage().remove('email');
-      GetStorage().remove('id');
-      GetStorage().remove('balance');
-      returnSuccess(responseData['message']);
-      return true;
-    } else {
-      final responseData = jsonDecode(response.body);
-      returnError(responseData['message']);
-      return false;
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = jsonDecode(response.body);
+        GetStorage().remove('token');
+        GetStorage().remove('onboarding');
+        GetStorage().remove('nom');
+        GetStorage().remove('prenom');
+        GetStorage().remove('email');
+        GetStorage().remove('id');
+        GetStorage().remove('balance');
+        returnSuccess(responseData['message']);
+        return true;
+      } else {
+        final responseData = jsonDecode(response.body);
+        returnError(responseData['message']);
+        return false;
+      }
+    } catch (error) {
+      throw Exception('Erreur lors de la déconnexion! L\'erreur est: $error');
     }
-  } catch (error) {
-    throw Exception('Erreur lors de la déconnexion! L\'erreur est: $error');
   }
-}
 }

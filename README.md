@@ -1,10 +1,15 @@
 # easy_market_client
 
-A new Flutter project.
+C'est une application de E-Commerce initialement appellé Easy Market mais par la suite Eranou
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Pour ce code Il faut exécuter la commande flutter pub get pour installer les dépendance 
+flutter run pour lancer le run
+
+### Developper
+Code ecrit par Orace EDJO developpeur Full-Stack web & mobile, ML et DL
+Contacts: +229 56324868/ +229 68894947, Email: oracejuscard@gmail.com, github/gitlab: orace18
 
 A few resources to get you started if this is your first Flutter project:
 

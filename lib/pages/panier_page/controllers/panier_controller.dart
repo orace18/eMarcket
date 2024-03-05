@@ -13,6 +13,7 @@ class PanierController extends GetxController {
   List<CartItem> cartItems = [];
   List<Article> articles = <Article>[].obs;
   final idText = GetStorage().read('id');
+  String token = GetStorage().read('token').toString();
 
 /*   Future<void> chargerArticles() async {
     final url = myCartUrl + id;
@@ -55,7 +56,9 @@ class PanierController extends GetxController {
         'articleId': articleId
       });
       final request = await http.post(Uri.parse(removetoCartUrl),
-      headers: {"Content-Type":"application/json"},
+      headers: {"Content-Type":"application/json",
+      'Authorization': 'Bearer $token'
+      },
       body:  body
       );
 
@@ -79,7 +82,9 @@ class PanierController extends GetxController {
     String id = idText.toString();
     final url = myCartUrl + id;
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url),
+      headers: {'Authorization': 'Bearer $token'}
+      );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);

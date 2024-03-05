@@ -78,6 +78,7 @@ import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:easy_market_client/pages/home_page/models/categorie.dart';
 import 'package:easy_market_client/pages/home_page/models/produit.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
@@ -87,17 +88,18 @@ class HomeController extends GetxController {
   RxList<Article> products = <Article>[].obs;
   RxList<Category> filteredCategories = <Category>[].obs;
   RxList<Article> filteredProducts = <Article>[].obs;
+  String token = GetStorage().read("token").toString();
 
   @override
   void onInit() {
     super.onInit();
-    
   }
 
   void navigateBack() => Get.back();
 
   Future<List<Article>> fetchArticles() async {
-    final response = await http.get(Uri.parse(popularProductUrl));
+    final response = await http.get(Uri.parse(popularProductUrl),
+    headers: {'Authorization': 'Bearer $token'});
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final List<dynamic> data = json.decode(response.body);
@@ -108,7 +110,10 @@ class HomeController extends GetxController {
   }
 
   Future<List<Category>> fetchCategories() async {
-    final response = await http.get(Uri.parse(categorieUrl)); // Assurez-vous d'utiliser la bonne URL
+    final response = await http.get(
+      Uri.parse(categorieUrl),
+      headers: {'Authorization': 'Bearer $token'},
+    ); 
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final List<dynamic> data = json.decode(response.body);
@@ -137,8 +142,6 @@ class HomeController extends GetxController {
             product.description.toLowerCase().contains(searchValue))
         .toList());
 
-    // Combinez les résultats filtrés dans une liste commune (ou modifiez en fonction de vos besoins)
     filteredItems.assignAll([...filteredCategories, ...filteredProducts]);
   }
-
 }
