@@ -33,8 +33,7 @@ class AuthClient {
       } else if (resquest.statusCode == 404) {
         Get.snackbar("error".tr, "Vérifiez votre connexion internet");
         return false;
-      }
-      else {
+      } else {
         final res = jsonDecode(resquest.body);
         returnError(res['message']);
         return false;
@@ -44,11 +43,12 @@ class AuthClient {
     }
   }
 
-  Future<bool> login(String mail, String password) async {
-    final body = jsonEncode({'email': mail, 'password': password});
+  Future<bool> login(String phone, String password) async {
+    final body = jsonEncode({'phone': phone, 'password': password});
     try {
       final resquet = await http.post(Uri.parse(loginUrl),
           headers: {'Content-Type': 'application/json'}, body: body);
+      
       if (resquet.statusCode == 200 || resquet.statusCode == 201) {
         final res = jsonDecode(resquet.body);
         returnSuccess(res['message']);

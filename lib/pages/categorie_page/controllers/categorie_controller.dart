@@ -18,27 +18,6 @@ class CategoriesController extends GetxController {
     fetchCategories(); // Appel à la fonction pour charger les catégories au démarrage du contrôleur
   }
 
-  /*  Future<void> fetchCategories() async {
-    try {
-      final response = await http.get(Uri.parse("$categorieUrl"));
-
-      if (response.statusCode == 200) {
-        Iterable categoriesJson = json.decode(response.body);
-        categories.assignAll(categoriesJson.map((category) => Categorie(
-          id: category['_id'],
-          libelle: category['libelle'],
-          description: category['description'],
-          nombres: "category['nombres']", 
-        )).toList());
-        filteredCategories.assignAll(categories); 
-      } else {
-        throw Exception("Échec de chargement des catégories");
-      }
-    } catch (error) {
-      print("Erreur lors du chargement des catégories : $error");
-    }
-  } */
-
   Future<void> fetchCategories() async {
     try {
       final response = await http.get(Uri.parse(countCategoriUrl),
@@ -51,6 +30,7 @@ class CategoriesController extends GetxController {
                   id: null,
                   libelle: categoryData['categoryName'],
                   nombres: categoryData['articleCount'].toString(),
+                
                 ))
             .toList());
         filteredCategories.assignAll(categories);

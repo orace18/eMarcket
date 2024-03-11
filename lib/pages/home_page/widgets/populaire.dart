@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:easy_market_client/pages/articles_page/index.dart';
 import 'package:easy_market_client/pages/home_page/controllers/home_controller.dart';
-import 'package:easy_market_client/pages/home_page/models/categorie.dart';
 import 'package:easy_market_client/pages/home_page/models/produit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +34,8 @@ class PopularSection extends GetWidget<HomeController> {
                     final article = snapshot.data![index];
                     return GestureDetector(
                       onTap: () {
-                        Get.to(ArticlePage(categorieLibelle: article.categorie));
+                        Get.to(
+                            ArticlePage(categorieLibelle: article.categorie));
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 8.0),
@@ -56,14 +55,28 @@ class PopularSection extends GetWidget<HomeController> {
                                 ),
                                 Text(
                                   article.nom,
-                                  style: TextStyle( color: Colors.red,fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Center(child: Text(article.description, style: TextStyle(color: Colors.blueGrey),)),
-                                SizedBox(height: 8,),
+                                Center(
+                                  child: Text(
+                                    article.description.length > 20
+                                        ? "${article.description.substring(0, 20)}..."
+                                        : article.description,
+                                    style: TextStyle(
+                                        color: Colors.blueGrey, fontSize: 12),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
                                 Text(
                                   "${article.prixPromo.toString()} FCFA",
                                   style: TextStyle(
                                       color: Colors.green,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],

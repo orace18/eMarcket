@@ -7,6 +7,7 @@ class Article {
   final String categorie;
   final String photo;
   final String merchantId;
+  final int quantity;
 
   Article({
     required this.id,
@@ -17,6 +18,7 @@ class Article {
     required this.categorie,
     required this.photo,
     required this.merchantId,
+    required this.quantity,
   });
 
   factory Article.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Article {
       categorie: json['categorie'] ?? '',
       photo: json['photo'] ?? '',
       merchantId: json['merchant_id'] ?? '',
+      quantity: (json['quantity'] ?? 0).toInt(),
     );
   }
 }

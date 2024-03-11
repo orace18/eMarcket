@@ -5,12 +5,14 @@ class Category {
   final String libelle;
   final String description;
   final String nombres;
+  final String? images;
 
   Category({
     required this.id,
     required this.libelle,
     required this.description,
     required this.nombres,
+    required this.images,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class Category {
       libelle: json['libelle'] ?? '',
       description: json['description'] ?? '',
       nombres: json['nombres'] ?? '',
+      images: json['photo'] ?? '',
     );
   }
 }

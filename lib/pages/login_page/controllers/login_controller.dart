@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   void navigateBack() => Get.back();
-  final TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  var phoneIsoCode;
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   bool validateForm() {

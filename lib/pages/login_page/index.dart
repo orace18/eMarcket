@@ -6,10 +6,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginController _controller = Get.put(LoginController());
-
+  String phoneText = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,19 +39,20 @@ class LoginPage extends StatelessWidget {
                   key: _controller.formKey,
                   child: Column(
                     children: [
-                      FormBuilderTextField(
-                        name: 'email',
-                        controller: _controller.emailController,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
+                      InternationalPhoneNumberInput(
+                        onInputChanged: (PhoneNumber number) {
+                          phoneText = number.phoneNumber ?? '';
+
+                          print('Le phone code $number');
+                        },
+                        initialValue: PhoneNumber(isoCode: 'BJ'),
+                        inputDecoration: InputDecoration(
+                          labelText: 'phone'.tr,
                           border: OutlineInputBorder(),
                         ),
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'imput_required'.tr),
-                          FormBuilderValidators.email(
-                              errorText: 'email_invalid'.tr),
-                        ]),
+                        selectorConfig: SelectorConfig(
+                          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                        ),
                       ),
                       SizedBox(height: 8),
                       FormBuilderTextField(
@@ -69,7 +71,7 @@ class LoginPage extends StatelessWidget {
                         ]),
                       ),
                       SizedBox(height: 16),
-                          Align(
+                      Align(
                         alignment: Alignment.centerRight,
                         child: InkWell(
                           onTap: () {
@@ -82,15 +84,18 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       ElevatedButton(
                         onPressed: () async {
                           if (_controller.validateForm()) {
                             print('Formulaire valide');
-                            print(_controller.emailController.text);
+                            print(_controller.phoneNumberController.text);
                             print(_controller.passwordController.text);
+                            print("Le num est :$phoneText");
                             bool isValid = await AuthClient().login(
-                                _controller.emailController.text,
+                                phoneText,
                                 _controller.passwordController.text);
                             if (isValid == true) {
                               GetStorage().write('login', true);
@@ -109,7 +114,11 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        child: Text('let_login'.tr, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                        child: Text(
+                          'let_login'.tr,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
