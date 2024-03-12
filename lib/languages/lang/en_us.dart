@@ -59,5 +59,8 @@ const en_US = {
   'error':'Error',
   'a': 'at',
   'reason':'Reason',
-  'amount': 'Amount'
+  'amount': 'Amount',
+  'other_user': 'Other user',
+  'since_your_wallet': 'since your wallet',
+  'short': 'Short'
 };

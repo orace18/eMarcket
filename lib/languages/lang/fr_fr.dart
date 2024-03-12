@@ -59,5 +59,8 @@ const fr_FR = {
   'error':'Erreur',
   'a': 'à',
   'reason':'Motif',
-  'amount': 'Montant'
+  'amount': 'Montant',
+  'other_user': 'Autre utilisateur',
+  'since_your_wallet': 'Depuis ton portfeuille',
+  'short': 'Court'
 };

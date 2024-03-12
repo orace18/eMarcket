@@ -46,8 +46,10 @@ class TransactionPage extends StatelessWidget {
 
   Future<void> chargerTransactions() async {
     final url = transactionHistoryUrl + userId;
+    String token = GetStorage().read('token').toString();
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http
+          .get(Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);

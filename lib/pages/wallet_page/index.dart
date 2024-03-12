@@ -1,3 +1,4 @@
+import 'package:easy_market_client/pages/wallet_page/widgets/send_money.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,11 +25,10 @@ class WalletPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.network(
-                  'https://imgs.search.brave.com/aARZMd7Xs_hsb5ParXMmNoz8QRGLX4Ui8ROWYuZ5QjE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni83NzEvNzcxNTEz/LnBuZw', // Remplacez par le chemin de votre image
-                  height: 50,
-                  width: 50,
-                 
-                ),
+                      'https://imgs.search.brave.com/aARZMd7Xs_hsb5ParXMmNoz8QRGLX4Ui8ROWYuZ5QjE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni83NzEvNzcxNTEz/LnBuZw', // Remplacez par le chemin de votre image
+                      height: 50,
+                      width: 50,
+                    ),
                     Text(
                       'solde'.tr + ': $balance FCFA',
                       style: TextStyle(
@@ -59,9 +59,9 @@ class WalletPage extends StatelessWidget {
                 child: Text(
                   'recharge'.tr,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               ElevatedButton(
@@ -80,12 +80,34 @@ class WalletPage extends StatelessWidget {
                 child: Text(
                   'tr_history'.tr,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
+          ),
+          SizedBox(height: 18.0),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: AppTheme.easyMarketMaterial,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(10),
+                  bottom: Radius.circular(10),
+                ),
+              ),
+            ),
+            onPressed: () {
+              Get.to(SendMoneyPage());
+            },
+            child: Text(
+              'recharge'.tr+' '+'other_user'.tr,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),

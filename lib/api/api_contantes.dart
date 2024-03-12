@@ -17,3 +17,4 @@ final logoutUrl = baseUrl + 'user/logout';
 final newPasswordUrl = baseUrl + 'user/forgot-password';
 final commandeUrl = baseUrl + 'commande/client/';
 final countCategoriUrl = baseUrl + 'article/countbycategory';
+final sendMoneyUrl = baseUrl + 'wallet/transfert';

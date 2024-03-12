@@ -17,7 +17,7 @@ class NotificationController extends GetxController {
           .get(Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
 
       if (request.statusCode == 200 || request.statusCode == 201) {
-        List<dynamic> commandes = jsonDecode(request.body)['commandes'];
+        List<dynamic> commandes = jsonDecode(request.body)['commandesNonValides'];
         if (commandes.isNotEmpty) {
           for (var command in commandes) {
             String articleId = command['articleId'];
