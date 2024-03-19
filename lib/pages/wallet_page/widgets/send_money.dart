@@ -1,4 +1,3 @@
-
 import 'package:easy_market_client/pages/wallet_page/controllers/wallet_controller.dart';
 import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +40,7 @@ class SendMoneyPage extends StatelessWidget {
                       InternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {
                           phoneText = number.phoneNumber ?? '';
-
-                          print('Le phone code $number');
+                          //print('Le phone code $number');
                         },
                         initialValue: PhoneNumber(isoCode: 'BJ'),
                         inputDecoration: InputDecoration(

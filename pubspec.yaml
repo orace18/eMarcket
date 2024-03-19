@@ -51,6 +51,7 @@ dependencies:
   google_places_flutter: ^2.0.8
   google_maps_flutter: ^2.5.3
   carousel_slider: ^4.2.1
+  change_app_package_name: ^1.1.0
 
   
 

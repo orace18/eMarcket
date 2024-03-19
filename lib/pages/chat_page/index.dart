@@ -206,8 +206,8 @@ class ChatPageState extends State<ChatPage> {
                           ),
                           onPressed: () {
                             if (msgtext.text != "") {
-                              sendmsg(msgtext.text,
-                                  recieverid); //send message with webspcket
+                            //  sendmsg(msgtext.text,
+                             //     recieverid); //send message with webspcket
                             } else {
                               print("Enter message");
                             }
