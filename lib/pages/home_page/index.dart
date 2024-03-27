@@ -1,5 +1,6 @@
 import 'package:easy_market_client/pages/home_page/controllers/home_controller.dart';
 import 'package:easy_market_client/pages/home_page/widgets/le_appbar.dart';
+import 'package:easy_market_client/pages/home_page/widgets/my_circle_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_market_client/pages/home_page/widgets/bottom_menu.dart';
 import 'package:easy_market_client/pages/home_page/widgets/categorie.dart';
@@ -7,10 +8,39 @@ import 'package:easy_market_client/pages/home_page/widgets/populaire.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
   final PageController _pageController = PageController(initialPage: 0);
   HomeController controller = HomeController();
+  int _selectedIndex = 0;
 
+  void _onItemPressed(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (_selectedIndex) {
+      case 0:
+        Get.offAllNamed('/home');
+        break;
+      case 1:
+        Get.toNamed('/add');
+        break;
+      case 2:
+        Get.toNamed('/notification');
+        break;
+      case 3:
+        Get.toNamed('/notification');
+        break;
+    }
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +81,18 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: MyCircleBottomNavigation(
+        itemIcons: controller.itemIcons,
+        centerText: 'Center',
+        selectedIndex: 0,
+        onItemPressed: (index) {
+          _onItemPressed(index);
+        },
+      ),
     );
   }
+
+
 
   Widget buildCarouselItem(Color color, String text) {
     return Container(
@@ -69,7 +108,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: Icon(
                 Icons.shape_line_rounded,
-                color: Colors.white,
+                color: Colors.blue,
               ),
               onPressed: () {},
             ),

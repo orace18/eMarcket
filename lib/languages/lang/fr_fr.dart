@@ -62,5 +62,8 @@ const fr_FR = {
   'amount': 'Montant',
   'other_user': 'Autre utilisateur',
   'since_your_wallet': 'Depuis ton portfeuille',
-  'short': 'Court'
+  'short': 'Court',
+  'address': 'Adresse',
+'livraison_place': 'Lieu de livraison',
+  'send': 'Envoyer'
 };

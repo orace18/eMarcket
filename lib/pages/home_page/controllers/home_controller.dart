@@ -77,6 +77,7 @@ import 'dart:convert';
 import 'package:easy_market_client/api/api_contantes.dart';
 import 'package:easy_market_client/pages/home_page/models/categorie.dart';
 import 'package:easy_market_client/pages/home_page/models/produit.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -89,6 +90,7 @@ class HomeController extends GetxController {
   RxList<Category> filteredCategories = <Category>[].obs;
   RxList<Article> filteredProducts = <Article>[].obs;
   String token = GetStorage().read("token").toString();
+  List<IconData> itemIcons = [Icons.home, Icons.shape_line_rounded, Icons.notifications];
 
   @override
   void onInit() {
@@ -96,6 +98,8 @@ class HomeController extends GetxController {
   }
 
   void navigateBack() => Get.back();
+
+
 
   Future<List<Article>> fetchArticles() async {
     final response = await http.get(Uri.parse(popularProductUrl),

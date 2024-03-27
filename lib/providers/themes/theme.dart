@@ -51,9 +51,9 @@ class AppTheme {
     ),
     fontFamily: GoogleFonts.roboto().fontFamily,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white,//Color.fromARGB(236, 247, 236, 236),
       selectedItemColor: Colors.green[800],
-      unselectedItemColor: Colors.green[100],
+      unselectedItemColor: Colors.blue,
       // selectedItemColor: Colors.green[800].withOpacity(0.7),
       // unselectedItemColor: Colors.green[800].withOpacity(0.32),
       showUnselectedLabels: true,
@@ -65,7 +65,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       color: Colors.grey[900],
       iconTheme: IconThemeData(
-        color: Colors.green[800],
+        color: Colors.white,
       ),
     ),
     colorScheme: ColorScheme.dark(
@@ -89,10 +89,10 @@ class AppTheme {
   );
 
   static const MaterialColor easyMarketMaterial = MaterialColor(_easyMarketMaterialPrimaryValue, <int, Color>{
-    50: Color(0xFFCFF1E3),
-    100: Color(0xFF14AB87),
+    50: Color(0xFFF7ECEC),
+    100: Color(0xFF593535),
     200: Color(0xFF00684E),
-    300: Color(0xFF00783E),
+    300: Color(0xFF593535),
     400: Color(0xFF00752E),
     500: Color(_easyMarketMaterialPrimaryValue),
     600: Color(0xFF00552E),
@@ -100,7 +100,7 @@ class AppTheme {
     800: Color(0xFF00562E),
     900: Color(0xFF00572E),
   });
-  static const int _easyMarketMaterialPrimaryValue = 0xFF00702E;
+  static const int _easyMarketMaterialPrimaryValue = 0xFF593535;
 
   static const MaterialColor easyMarketMaterialAccent = MaterialColor(_easyMarketMaterialAccentValue, <int, Color>{
     100: Color(0xFFFFFFFF),

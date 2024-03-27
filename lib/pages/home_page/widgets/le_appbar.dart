@@ -10,7 +10,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Container(
         child: Row(
@@ -33,9 +32,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       title: Image.asset(
-        'assets/logos/eranou_ligth.jpeg',
-        fit: BoxFit.cover,
-        height: 130,
+        'assets/logos/eranou.png',
+       // fit: BoxFit.cover,
+        height: 150,
         width: double.infinity,
       ),
       actions: [
@@ -45,11 +44,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.network(
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(
               'https://th.bing.com/th/id/OIP.audMX4ZGbvT2_GJTx2c4GgHaHw?w=197&h=206&c=7&r=0&o=5&pid=1.7', // Remplacez par le chemin de votre image
-              height: 30,
-              width: 30,
               //color: Color(0xFF196CB0),
+                scale: 8.0
+            ),
             ),
           ),
         ),

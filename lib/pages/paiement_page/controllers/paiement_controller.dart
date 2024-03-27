@@ -121,7 +121,7 @@ class PaiementController extends GetxController {
         sandbox: false,
         apikey: "b8ab8800a531d4fad4e282ed3c9ea3f78b7286a1",
         callback: successCallback,
-        theme: "#008000",
+        theme: "#593535",
         paymentMethods: ["momo", "card"]);
     return kkiapay;
   }

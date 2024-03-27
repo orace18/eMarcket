@@ -17,8 +17,43 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
   final montant = GetStorage().read('montant');
   String token = GetStorage().read('token').toString();
 
+  bool isLocationEmpty = false;
+
+  String checkPlace() {
+    String place = GetStorage().read('addresse').toString();
+    if (place == null) {
+      place = 'Cotonou';
+      return place;
+    } else {
+      return place;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkPlace();
+    _locationController.addListener(_onLocationTextChanged);
+  }
+
+  @override
+  void dispose() {
+    _locationController.dispose();
+    super.dispose();
+  }
+
+  void _onLocationTextChanged() {
+    setState(() {
+      if(_locationController.text.isEmpty){
+        isLocationEmpty = false;
+      }else{
+        isLocationEmpty = true;
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
+   //_locationController.text = checkPlace();
     return Scaffold(
       appBar: AppBar(
         title: Text('livraison_place'.tr),
@@ -39,7 +74,7 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
                       child: TextField(
                         controller: _locationController,
                         decoration: InputDecoration(
-                          hintText: 'Lieu de livraison',
+                          hintText: '${checkPlace()}',
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(10),
                         ),
@@ -60,6 +95,7 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
               SizedBox(height: 16),
               Text('Montant: $montant FCFA'),
               SizedBox(height: 16),
+              if(isLocationEmpty)
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: AppTheme.easyMarketMaterial,
@@ -120,7 +156,6 @@ class _PlaceChoosePageState extends State<PlaceChoosePage> {
     String dateTime = DateTime.now().toString();
     String id = GetStorage().read('id').toString();
     String nom = GetStorage().read('nom').toString() +
-        " " +
         GetStorage().read('prenom').toString();
     String idCommande = dateTime + id + nom;
 

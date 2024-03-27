@@ -62,5 +62,8 @@ const en_US = {
   'amount': 'Amount',
   'other_user': 'Other user',
   'since_your_wallet': 'since your wallet',
-  'short': 'Short'
+  'short': 'Short',
+  'address': 'Address',
+  'livraison_place': 'Delivery Place',
+  'send': 'Send'
 };

@@ -33,7 +33,7 @@ class _ArticlePageState extends State<ArticlePage> {
       List<dynamic> data = json.decode(response.body);
       setState(() {
         allArticles = data.map((item) => Article.fromJson(item)).toList();
-        // Initialize filteredArticles with all articles
+        filterArticles('');
       });
     } else {
       print('Erreur de chargement des articles: ${response.statusCode}');
@@ -44,25 +44,18 @@ class _ArticlePageState extends State<ArticlePage> {
   void initState() {
     super.initState();
     fetchArticles();
-    filteredArticles = getArticlesByCategorie();
   }
 
   void showProductDetails(Article article) {
     Get.to(() => ProductPage(article: article));
   }
 
-  List<Article> getArticlesByCategorie() {
-    return allArticles
-        .where((article) => article.categorie == widget.categorieLibelle)
-        .toList();
-  }
-
   void filterArticles(String query) {
     setState(() {
       filteredArticles = allArticles
           .where((article) =>
-              article.categorie == widget.categorieLibelle &&
-              article.nom.toLowerCase().contains(query.toLowerCase()))
+      article.categorie == widget.categorieLibelle &&
+          article.nom.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -137,7 +130,7 @@ class _ArticlePageState extends State<ArticlePage> {
                                   children: [
                                     TextSpan(
                                       text:
-                                          "${filteredArticles[index].prix} FCFA",
+                                      "${filteredArticles[index].prix} FCFA",
                                       style: const TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
@@ -153,7 +146,7 @@ class _ArticlePageState extends State<ArticlePage> {
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.shopping_cart),
-                      color: AppTheme.easyMarketMaterial,
+                      color: Colors.grey,
                       onPressed: () {
                         showProductDetails(filteredArticles[index]);
                       },

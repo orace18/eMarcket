@@ -25,10 +25,13 @@ class ProductPage extends GetWidget<ProductController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 200,
+                height: 300,
+                margin: EdgeInsets.only(top: 10),
                 child: PageView(
                   children: [
-                    Image.network("$baseUrl${article.photo}"),
+                    Image.network("$baseUrl${article.photo}",
+                      fit: BoxFit.cover,
+                    ),
                   ],
                 ),
               ),

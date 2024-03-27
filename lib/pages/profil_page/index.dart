@@ -1,4 +1,5 @@
 import 'package:easy_market_client/pages/profil_page/controllers/profil_controller.dart';
+import 'package:easy_market_client/pages/profil_page/widgets/edite_local.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,6 +11,7 @@ class ProfilePage extends GetWidget<ProfilController> {
     final prenom = GetStorage().read('prenom');
     final phone = GetStorage().read('phone');
     final email = GetStorage().read('email');
+    String address = GetStorage().read('addresse').toString() ?? "Cotonou";
 
     final imageUrl =
         'https://th.bing.com/th/id/R.0eb5a1538ba98876497630ddf01ec65b?rik=hLPyBRGrrbKmTA&pid=ImgRaw&r=0';
@@ -112,6 +114,43 @@ class ProfilePage extends GetWidget<ProfilController> {
                 ),
               ),
             ),
+             InkWell(
+              onTap: () {
+                Get.to(EditePage());
+              },
+              child: Card(
+                elevation: 5.0,
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'address'.tr,
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            SizedBox(width: 16),
+                            Icon(
+                              Icons.place,
+                              weight: 12,
+                              color: Colors.black,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "${address}",
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
             InkWell(
               onTap: () {
                 Get.toNamed('/setting');
@@ -123,16 +162,25 @@ class ProfilePage extends GetWidget<ProfilController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'setting'.tr,
-                        style: TextStyle(fontSize: 16.0),
+                      Row(
+                        children: [
+                          Text(
+                            'setting'.tr,
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            weight: 12,
+                            color: Colors.black,
+                          ),
+                        ],
                       ),
-                      Icon(Icons.chevron_right, weight: 12, color: Colors.black,),
+                      
                     ],
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

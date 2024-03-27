@@ -23,7 +23,7 @@ class PopularSection extends GetWidget<HomeController> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
+                return Center(child: Text('Erreur: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return Text('No popular items available');
               } else {
@@ -73,12 +73,14 @@ class PopularSection extends GetWidget<HomeController> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "${article.prixPromo.toString()} FCFA",
+                                  "${article.prixPromo != null ? "${article.prixPromo} FCFA" : "Prix non disponible"}",
                                   style: TextStyle(
                                       color: Colors.green,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold
+                                  ),
                                 ),
+
                               ],
                             ),
                           ),
