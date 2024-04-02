@@ -12,7 +12,7 @@ const easyMarketGreen = Color(0xFFF7ECEC);
 const easyMarketGreenLigth = Color(0xFF00EF44);
 const easyMarketYellow = Color(0xfffacc22);
 const easyMarketBleu = Color(0xFFF7ECEC);
-const primaryColor = Colors.blue;
+const primaryColor = Color(0xFF2A4A61);
 
 const headingStyle = TextStyle(
   fontSize: 24,
@@ -60,3 +60,5 @@ String private_key =
     "pk_d0db75af8c452447f9b020cc251bd08930e55e4e53aef2880f623905190cda25";
 String secret =
     "sk_061a182a4551eddcece391138eaaabd07337f8a3acfec29c5f6a7c8b1d5d20e5";
+
+

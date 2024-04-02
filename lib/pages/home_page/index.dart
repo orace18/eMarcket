@@ -2,7 +2,6 @@ import 'package:easy_market_client/pages/home_page/controllers/home_controller.d
 import 'package:easy_market_client/pages/home_page/widgets/le_appbar.dart';
 import 'package:easy_market_client/pages/home_page/widgets/my_circle_bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_market_client/pages/home_page/widgets/bottom_menu.dart';
 import 'package:easy_market_client/pages/home_page/widgets/categorie.dart';
 import 'package:easy_market_client/pages/home_page/widgets/populaire.dart';
 import 'package:get/get.dart';
@@ -17,30 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   final PageController _pageController = PageController(initialPage: 0);
   HomeController controller = HomeController();
-  int _selectedIndex = 0;
-
-  void _onItemPressed(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (_selectedIndex) {
-      case 0:
-        Get.offAllNamed('/home');
-        break;
-      case 1:
-        Get.toNamed('/add');
-        break;
-      case 2:
-        Get.toNamed('/notification');
-        break;
-      case 3:
-        Get.toNamed('/notification');
-        break;
-    }
-  }
-
-  @override
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +37,14 @@ class _HomePageState extends State<HomePage> {
                 options: CarouselOptions(
                   height: 190.0,
                   aspectRatio: 16 / 9,
-                  viewportFraction: 1.0, // Occupy the whole container
+                  viewportFraction: 1.0, 
                   initialPage: 0,
                   enableInfiniteScroll: true,
                   reverse: false,
                   autoPlay: true,
                   autoPlayInterval: Duration(seconds: 3),
                   autoPlayAnimationDuration:
-                      Duration(milliseconds: 800), // Set a very short duration
+                      Duration(milliseconds: 800), 
                   autoPlayCurve: Curves.linear,
                   enlargeCenterPage: false,
                   scrollDirection: Axis.horizontal,
@@ -86,7 +62,20 @@ class _HomePageState extends State<HomePage> {
         centerText: 'Center',
         selectedIndex: 0,
         onItemPressed: (index) {
-          _onItemPressed(index);
+          switch (index) {
+            case 0:
+              Get.offAllNamed('/home');
+              break;
+            case 1:
+              Get.toNamed('/add');
+              break;
+            case 3:
+              Get.toNamed('/notification');
+              break;
+            case 4:
+              Get.toNamed('/profil');
+              break;
+          }
         },
       ),
     );

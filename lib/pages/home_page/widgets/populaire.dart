@@ -22,8 +22,7 @@ class PopularSection extends GetWidget<HomeController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Erreur: ${snapshot.error}'));
+              
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return Text('No popular items available');
               } else {
@@ -48,6 +47,12 @@ class PopularSection extends GetWidget<HomeController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                               /*    CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: NetworkImage(
+                          imageUrl,
+                        ),
+                      ), */
                                 Image.network(
                                   "$baseUrl${article.photo}",
                                   height: 90,

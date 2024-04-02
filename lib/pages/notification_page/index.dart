@@ -96,8 +96,8 @@ class _NotificationPageState extends State<NotificationPage> {
             case 2:
               Get.toNamed('/notification');
               break;
-            case 3:
-              Get.toNamed('/notification');
+            case 4:
+              Get.toNamed('/profil');
               break;
           }
         },

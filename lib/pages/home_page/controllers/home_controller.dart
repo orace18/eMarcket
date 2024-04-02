@@ -90,7 +90,8 @@ class HomeController extends GetxController {
   RxList<Category> filteredCategories = <Category>[].obs;
   RxList<Article> filteredProducts = <Article>[].obs;
   String token = GetStorage().read("token").toString();
-  List<IconData> itemIcons = [Icons.home, Icons.shape_line_rounded, Icons.notifications];
+
+  List<IconData> itemIcons = [Icons.home, Icons.shape_line_rounded, Icons.notifications, Icons.person];
 
   @override
   void onInit() {

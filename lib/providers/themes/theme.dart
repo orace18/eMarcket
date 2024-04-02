@@ -14,7 +14,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       color: easyMarketGreen,
       iconTheme: IconThemeData(
-        color: Colors.white,
+        color: Colors.black,
       ),
     ),
     textTheme: GoogleFonts.robotoTextTheme(),

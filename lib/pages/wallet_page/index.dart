@@ -24,8 +24,8 @@ class WalletPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.network(
-                      'https://imgs.search.brave.com/aARZMd7Xs_hsb5ParXMmNoz8QRGLX4Ui8ROWYuZ5QjE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni83NzEvNzcxNTEz/LnBuZw', // Remplacez par le chemin de votre image
+                    Image.asset(
+                       'assets/logos/reglages.png',
                       height: 50,
                       width: 50,
                     ),

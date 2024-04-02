@@ -62,11 +62,11 @@ class CategoriePage extends StatelessWidget {
             case 1:
               Get.toNamed('/add');
               break;
-            case 2:
-              Get.toNamed('/notification');
-              break;
             case 3:
               Get.toNamed('/notification');
+              break;
+            case 4:
+              Get.toNamed('/profil');
               break;
           }
         },
