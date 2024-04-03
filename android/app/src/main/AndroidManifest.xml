@@ -6,7 +6,7 @@
         android:usesCleartextTraffic="true"
         android:label="Eranou Client"
         android:name="${applicationName}"
-        android:icon="@drawable/eranou_ligth">
+        android:icon="@drawable/eranou">
         <activity
             android:showWhenLocked="true"
             android:turnScreenOn="true"

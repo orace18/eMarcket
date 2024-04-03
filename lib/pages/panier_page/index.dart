@@ -5,7 +5,7 @@ import 'package:easy_market_client/providers/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:intl/intl.dart';
 import '../home_page/widgets/my_circle_bottom_navigation.dart';
 
 class MonPanierPage extends StatelessWidget {
@@ -62,213 +62,117 @@ class MonPanierPage extends StatelessWidget {
       ),
     );
   }
-   String balance = GetStorage().read("balance").toString() ?? "0";
 
-  Widget buildCartList() {
-    if (double.parse(balance) >= panierController.total) {
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            Card(
-              elevation: 10.0,
-              color: Colors.amber,
-              child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.account_balance_wallet,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'solde'.tr + ': $balance FCFA',
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+  String? balance = GetStorage().read("balance")?.toString();
 
-            SizedBox(height: 10.0),
-            for (int index = 0; index <
-                panierController.articles.length; index++)
-              buildCartItem(index),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('sous_total'.tr),
-                  SizedBox(
-                    width: 100,
-                  ),
-                  Expanded(
-                    child: Text('${panierController.sousTotal} FCFA'),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('taxe'.tr + ' (18%)'),
-                  SizedBox(
-                    width: 100,
-                  ),
-                  Expanded(
-                    child: Text('+${panierController.taxe} FCFA'),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('total'.tr),
-                  SizedBox(
-                    width: 130,
-                  ),
-                  Expanded(
-                    child: Text(
-                      '${panierController.total} FCFA',
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AppTheme.easyMarketMaterial,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(10),
-                    bottom: Radius.circular(10),
-                  ),
-                ),
-              ),
-              onPressed: () {
-                panierController.passerAuPaiement();
-              },
-              child: Text(
-                'pay'.tr,
-                style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      );
-    }else{
-      return SingleChildScrollView(
-          child: Column(
-          children: [
+
+Widget buildCartList() {
+  final format = NumberFormat("#,##0 FCFA"); // Définir le format avec des séparateurs de milliers et " FCFA" à la fin
+
+  return SingleChildScrollView(
+    child: Column(
+      children: [
         Card(
-        elevation: 10.0,
-        color: Colors.amber,
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
+          elevation: 10.0,
+          color: Colors.amber,
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(
+                  Icons.account_balance_wallet,
+                  color: Colors.white,
+                ),
+                Text(
+                  'solde'.tr + ': ${format.format(double.parse(balance ?? '0'))}',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 10.0),
+        for (int index = 0; index < panierController.articles.length; index++)
+          buildCartItem(index),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.account_balance_wallet,
-                color: Colors.white,
+              /* Text('sous_total'.tr),
+              SizedBox(
+                width: 100,
               ),
-              Text(
-                'solde'.tr + ': $balance FCFA',
-                style: TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text('${panierController.sousTotal} FCFA'),
+              ), */
+            ],
+          ),
+        ),
+        /* Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('taxe'.tr + ' (18%)'),
+              SizedBox(
+                width: 100,
+              ),
+              Expanded(
+                child: Text('+${panierController.taxe} FCFA'),
+              ),
+            ],
+          ),
+        ), */
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('total'.tr),
+              SizedBox(
+                width: 130,
+              ),
+              Expanded(
+                child: Text(
+                  '${format.format(panierController.total)}', // Utiliser NumberFormat pour formater le total
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
         ),
-      ),
+        Text(
+          'Votre solde est insuffisant pour payer le total.',
+          style: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'Recharger votre portefeuille',
+          style: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
-    SizedBox(height: 10.0),
-    for (int index = 0; index <
-    panierController.articles.length; index++)
-    buildCartItem(index),
-    Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-    Text('sous_total'.tr),
-    SizedBox(
-    width: 100,
-    ),
-    Expanded(
-    child: Text('${panierController.sousTotal} FCFA'),
-    ),
-    ],
-    ),
-    ),
-    Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-    Text('taxe'.tr + ' (18%)'),
-    SizedBox(
-    width: 100,
-    ),
-    Expanded(
-    child: Text('+${panierController.taxe} FCFA'),
-    ),
-    ],
-    ),
-    ),
-    Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-    Text('total'.tr),
-    SizedBox(
-    width: 130,
-    ),
-    Expanded(
-    child: Text(
-    '${panierController.total} FCFA',
-    style: const TextStyle(
-    color: Colors.black, fontWeight: FontWeight.bold),
-    ),
-    ),
-    ],
-    ),
-    ),
-            Text(
-              'Votre solde est insuffisant pour payer le total.',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-                  ' Recharger votre portefeuille',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-    ],
-    ),
-      );
-      }
-  }
-
-  Widget buildCartItem(int index) {
+  /*  Widget buildCartItem(int index) {
     final article = panierController.articles[index];
     return Card(
       color: Colors.green[100],
+      shadowColor: Colors.transparent,
       child: ListTile(
         leading: Image.network(
           article.image,
@@ -335,5 +239,90 @@ class MonPanierPage extends StatelessWidget {
         ),
       ),
     );
-  } 
+  } */
+
+// Dans la méthode buildCartList(), utilisez NumberFormat pour formater les montants :
+
+  Widget buildCartItem(int index) {
+    final article = panierController.articles[index];
+    final prixTotal = article.prixOriginal * article.quantite;
+    final prixRemise = article.prix * article.quantite;
+
+    final format = NumberFormat(
+        "#,##0 FCFA"); // Définir le format avec des séparateurs de milliers et "FCFA" à la fin
+
+    return Card(
+      color: Colors.green[100],
+      shadowColor: Colors.transparent,
+      child: ListTile(
+        leading: Image.network(
+          article.image,
+          height: 50,
+          width: 50,
+        ),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                article.nom,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('${article.categorie}'),
+            Row(
+              children: [
+                Text(
+                  'quantity'.tr + ' ${article.quantite}',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        trailing: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              format.format(
+                  prixTotal), // Formater le montant total avec NumberFormat
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              format.format(
+                  prixRemise), // Formater le montant de remise avec NumberFormat
+              style: TextStyle(
+                color: Colors.red,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+            Container(
+              height: 24,
+              child: IconButton(
+                icon: Icon(Icons.delete, color: Colors.black),
+                onPressed: () {
+                  panierController.supprimerArticle(article.id);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

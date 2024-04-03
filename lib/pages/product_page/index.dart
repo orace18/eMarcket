@@ -13,6 +13,12 @@ class ProductPage extends GetWidget<ProductController> {
 
   final ProductController controller = Get.put(ProductController());
 
+  String formatterPrix(double prix) {
+    String prixFormate = prix.toStringAsFixed(0).replaceAll('.', '').replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+    return '$prixFormate FCFA';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,28 +60,6 @@ class ProductPage extends GetWidget<ProductController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.yellow),
-                        SizedBox(width: 8),
-                        Text('4.6 (89 vue)'),
-                      ],
-                    ),
-                    Text(
-                      '${article.prixPromo} FCFA',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,15 +68,15 @@ class ProductPage extends GetWidget<ProductController> {
                       'prix'.tr,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 24,
                       ),
                     ),
                     Text(
-                      '${article.prix} FCFA',
+                      formatterPrix(article.prix),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        decoration: TextDecoration.lineThrough,
+                        //decoration: TextDecoration.lineThrough,
                       ),
                     ),
                   ],

@@ -21,11 +21,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
-                  'assets/logos/wallet.png',
+                  'assets/logos/portefeuille.png',
                   height: 30,
                   width: 30,
                  
                 ),
+                /* CircleAvatar(
+              radius: 15,
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage(
+               /*  'assets/logos/wallet.png',
+            ),
+            ), */ */
               ),
             ),
           ],
@@ -45,11 +52,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
-              radius: 20,
+              radius: 15,
               backgroundColor: Colors.white,
               backgroundImage: AssetImage(
                 'assets/logos/reglages.png',
-              
             ),
             ),
           ),

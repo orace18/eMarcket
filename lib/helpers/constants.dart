@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const appName = "Eranou";
+const appName = "Er@nou";
 const warningColor = Colors.orange;
 const errorColor = Colors.red;
 const successColor = Colors.green;
@@ -53,12 +53,5 @@ void returnSuccess(String success) {
     backgroundColor: Colors.green,
   );
 }
-
-// KKiaPay
-String public_key = "b8ab8800a531d4fad4e282ed3c9ea3f78b7286a1";
-String private_key =
-    "pk_d0db75af8c452447f9b020cc251bd08930e55e4e53aef2880f623905190cda25";
-String secret =
-    "sk_061a182a4551eddcece391138eaaabd07337f8a3acfec29c5f6a7c8b1d5d20e5";
 
 

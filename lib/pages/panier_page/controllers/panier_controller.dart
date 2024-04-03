@@ -130,7 +130,7 @@ class PanierController extends GetxController {
   }
 
   double get total {
-    return double.parse((sousTotal + taxe).toStringAsFixed(1));
+    return double.parse((sousTotal + 0).toStringAsFixed(1));
   }
 
   void augmenterQuantite(Article article) {

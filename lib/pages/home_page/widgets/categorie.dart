@@ -34,7 +34,7 @@ class CategorySection extends StatelessWidget {
           return Center(child: Text('No categories available'));
         } else {
           return SizedBox(
-            height: 290, 
+            height: 240, 
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,

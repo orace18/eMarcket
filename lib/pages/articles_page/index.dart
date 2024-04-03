@@ -23,6 +23,12 @@ class _ArticlePageState extends State<ArticlePage> {
   String token = GetStorage().read('token').toString();
   TextEditingController searchController = TextEditingController();
 
+  String formatterPrix(double prix) {
+    String prixFormate = prix.toStringAsFixed(0).replaceAll('.', '').replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+    return '$prixFormate FCFA';
+  }
+
   Future<void> fetchArticles() async {
     final response = await http.get(
       Uri.parse(articleUrl),
@@ -54,8 +60,8 @@ class _ArticlePageState extends State<ArticlePage> {
     setState(() {
       filteredArticles = allArticles
           .where((article) =>
-      article.categorie == widget.categorieLibelle &&
-          article.nom.toLowerCase().contains(query.toLowerCase()))
+              article.categorie == widget.categorieLibelle &&
+              article.nom.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -110,14 +116,14 @@ class _ArticlePageState extends State<ArticlePage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(filteredArticles[index].quantity.toString()),
+                        Text("${filteredArticles[index].quantity.toString()} stock"),
                         SizedBox(
                           height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("${filteredArticles[index].prixPromo} FCFA"),
+                            Text(formatterPrix(filteredArticles[index].prixPromo)),
                             const SizedBox(width: 1.5),
                             Expanded(
                               child: RichText(
@@ -130,7 +136,7 @@ class _ArticlePageState extends State<ArticlePage> {
                                   children: [
                                     TextSpan(
                                       text:
-                                      "${filteredArticles[index].prix} FCFA",
+                                          "${formatterPrix(filteredArticles[index].prix)}",
                                       style: const TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,

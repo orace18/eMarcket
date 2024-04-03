@@ -79,7 +79,7 @@ class OnboardingPage extends GetWidget<OnboardingController> {
                 child: Text(
                   "done".tr,
                   style: TextStyle(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
